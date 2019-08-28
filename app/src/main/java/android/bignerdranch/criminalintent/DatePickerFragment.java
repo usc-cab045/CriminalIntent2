@@ -2,6 +2,7 @@ package android.bignerdranch.criminalintent;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,4 +39,12 @@ public class DatePickerFragment extends DialogFragment {
                     .setView(v)
                     .setTitle(R.string.date_picker_title).setPositiveButton(android.R.string.ok, null)
                     .create();}
+    private void sendResult(int resultCode, Date date) {
+        if (getTargetFragment() == null) {
+            return; }
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_DATE, date);
+        getTargetFragment()
+                .onActivityResult(getTargetRequestCode(), resultCode, intent);
+    }
     }
